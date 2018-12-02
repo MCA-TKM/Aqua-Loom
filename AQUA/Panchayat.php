@@ -119,6 +119,8 @@ include_once 'connection.php';
 
 
 
+
+
       <!-- Scripts -->
   <!--     <script src="assets/js/jquery.min.js"></script>
       <script src="assets/js/skel.min.js"></script>
@@ -128,74 +130,89 @@ include_once 'connection.php';
       <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 
 
-      <script type="text/javascript">
-        $(document).ready(function(){
-          $(document).on('change', '#district', function(){ 
-            var districtID = $(this).val();
-            if(districtID){
-              $.ajax({
-                type:'POST',
-                url:'ajaxData.php',
-                data:'district_id='+districtID,
-                success:function(response){ 
-                  $('#taluk').html(response);
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('change', '#district', function(){ 
+      var districtID = $(this).val();
+      if(districtID){
+        $.ajax({
+          type:'POST',
+          url:'ajaxData.php',
+          data:'district_id='+districtID,
+          success:function(response){ 
+            $('#taluk').html(response);
 
-                }
-              }); 
-            }else{
-              $('#taluk').html('<option value="">Select District</option>');
-
-            }
-          });
-);
-
-          $('#add-new-p').submit(function(event) {
-           event.preventDefault();
-           $taluk = $('#taluk').val();
-           if($taluk == null) {
-            alert(" select taluk first !");
-            return;
           }
-          $panchayat = $('#panchayat').val();
-          $panchayat = $panchayat.trim();
-          if( $panchayat.length < 1) {
-            alert(" enter a valid panchayat");
-            return;
-          }
+        }); 
+      }else{
+        $('#taluk').html('<option value="">Select District</option>');
 
-          $.ajax({
-            type:'POST',
-            url:'ajaxData.php',
-            data: $(this).serialize(),
-            success:function(response){
-              console.log(response);
-              switch(parseInt(response.trim())) {
-                case 1: 
-                alert("data inserted successfully");
-                $('#panchayat').val('');
-                break;
+      }
+    });
 
-                case 2:
-                alert("Duplicate entry");
+    // $('#taluk').on('change',function(){
+    //   var TalukID = $(this).val();
+    //   if(sTalukID){
+    //     $.ajax({
+    //       type:'POST',
+    //       url:'ajaxData.php',
+    //       data:'Taluk_ID='+TalukID,
+    //       success:function(html){
+    //         $('#panchayat').html(html);
+    //       }
+    //     }); 
+    //   }else{
+    //     $('#panchayat').html('<option value="">Select state first</option>'); 
+    //   }
+    // });
 
-                break;
+    $('#add-new-p').submit(function(event) {
+     event.preventDefault();
+     $taluk = $('#taluk').val();
+     if($taluk == null) {
+      alert(" select taluk first !");
+      return;
+    }
+    $panchayat = $('#panchayat').val();
+    $panchayat = $panchayat.trim();
+    if( $panchayat.length < 1) {
+      alert(" enter a valid panchayat");
+      return;
+    }
 
-                default:
-                alert(" Errror from server");
-              }
+    $.ajax({
+      type:'POST',
+      url:'ajaxData.php',
+      data: $(this).serialize(),
+      success:function(response){
+        console.log(response);
+        switch(parseInt(response.trim())) {
+          case 1: 
+          alert("data inserted successfully");
+          $('#panchayat').val('');
+          break;
 
-            }
-          }); 
+          case 2:
+          alert("Duplicate entry");
+
+          break;
+
+          default:
+          alert(" Errror from server");
+        }
+
+      }
+    }); 
 
 
 
 
-        });
+  });
 
 
-        });
-      </script>
+  });
+</script>
 
 
-    </body>
-    </html>
+</body>
+</html>

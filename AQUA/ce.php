@@ -137,22 +137,14 @@ if(isset($_POST['submit']))
     $mobile=$_POST['Mobile'];
     
 
-    $a="select O_Id from office where O_Name='$superior'";
-    if ($result=mysqli_query($conn,$a))
-    {
-    // Fetch one and one row
-    while ($row=mysqli_fetch_row($result))
-      {
-     
-        //echo implode($row);
-        $idint=(int)implode($row);
-      }
-
-    }
+   
     
+    $ss="insert into log (emp_name,mob,pass,O_Id)values('$officename','$mobile',123456789,2)";
+   mysqli_query($conn, $ss);
 
-    $s="insert into ce (MD_Id,CE_Name,Mobile_Number) values('$idint','$officename','$mobile')";
+    $s="insert into ce (MD_Id,CE_Name,Mobile_Number,Password) values(1,'$officename','$mobile',12345)";
    mysqli_query($conn, $s);
+   
    
    $m="select * from ce";
    $result=mysqli_query($conn,$m);

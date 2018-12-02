@@ -18,9 +18,11 @@ if(isset($_POST['ee'])) {
         echo "2";
 
     } else {
+      $ss="insert into log (emp_name,mob,pass,O_Id)values('".$_POST["ee"]."', '".$_POST["Mobile"]."',123456789,4)";
+      mysqli_query($conn, $ss);
+  
 
-
-        $sql = "INSERT INTO ee (MD_Id,CE_Id,SE_Id,EE_Name,Mobile_Number)VALUES ('".$_POST["md"]."', '".$_POST["ce"]."', '".$_POST["se"]."', '".$_POST["ee"]."', '".$_POST["Mobile"]."')";
+        $sql = "INSERT INTO ee (MD_Id,CE_Id,SE_Id,EE_Name,Mobile_Number,Password)VALUES ('".$_POST["md"]."', '".$_POST["ce"]."', '".$_POST["se"]."', '".$_POST["ee"]."', '".$_POST["Mobile"]."','12345')";
 
       //echo $sql;
 

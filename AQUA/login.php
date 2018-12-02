@@ -55,7 +55,7 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" action="admin.php">
+				<form class="login100-form validate-form" action="LOGINVIEW.php" method="POST">
 
 				<div>
 						<div class="container-login100-form-btn">	
@@ -63,8 +63,8 @@
 					</div>
 			
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Username is required">
-							<span class="label-input100">Username</span>
-							<input class="input100" type="text" name="username" placeholder="Enter username">
+							<span class="label-input100">username</span>
+							<input class="input100" type="text" value="" name="username" placeholder="Enter username">
 							<span class="focus-input100"></span>
 						</div>
 
@@ -76,7 +76,7 @@
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 							<span class="label-input100">Password</span>
-							<input class="input100" type="password" name="pass" placeholder="Enter password">
+							<input class="input100" type="password" value="" name="pass" placeholder="Enter password">
 							<span class="focus-input100"></span>
 						</div>
 
@@ -111,28 +111,34 @@
 			</section>
 
 
-
 <?php
-
+include_once 'connection.php';
 
 
 if(isset($_POST['btn']))
  {
-	  //$Name=$_POST['name'];
-      //$OTP=$_POST['OTP'];
+	 $Name=$_POST['username'];
+      $OTP=$_POST['pass'];
 	  
 	  
 	  
-     // $conn=mysqli_connect("localhost","root","","water");
-	  //$s="insert into login values('$Name',' $OTP')";
-	  //mysqli_query($conn, $s);
+      
+	  $s="select AXE_id,AE_id,Password from ae where Password=OTP";
+	  mysqli_query($conn, $s);
 	  
-      //echo "Complaint Registered";
+If (mysql_num_rows($result) > 0) {
+    while ($row = mysql_fetch_array($result)) {
+        ?>
+        <tr>
+            <td><?php echo $row['AE_id']; ?></td> 
+            <td><?php echo $row['AXE_id']; ?></td> 
+           
+        </tr>
+        <?php
+    }
 }
-else
-//echo "failed"; 
+}
 ?>
-
-	
-</body>
-</html>
+        
+</BODY>    
+</HTML>
